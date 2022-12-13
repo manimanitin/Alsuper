@@ -29,15 +29,15 @@ if (estaLogueado()) {
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Contraseña</label>
-                <input type="text" class="form-control" name="usuario-password" id="pass" placeholder="">
+                <input type="password" class="form-control" name="usuario-password" id="usuario-password" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Confirmar contraseña</label>
-                <input type="text" class="form-control" name="usuario-confirmacion" id="pass2" placeholder="">
+                <input type="password" class="form-control" name="usuario-confirmacion" id="usuario-confirmacion" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nombre Completo</label>
-                <input type="" class="form-control" name="usuario-nombreCompleto" id="cp" placeholder="">
+                <input type="text" class="form-control" name="usuario-nombreCompleto" id="usuario-nombreCompleto" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nivel</label>
@@ -54,27 +54,63 @@ if (estaLogueado()) {
         $(document).ready(function() {
             $("#datos form").validate({
                 rules: {
-                    'usuario_nombre': {
+                    'usuario-id': {
                         required: true,
+                        digits: true
                     },
-
-                    'usuario_direccion': {
+                    'usuario-username': {
                         required: true,
+                        pattern: /^[a-z0-9]+$/
                     },
+                    'usuario-password': {
+                        required: true,
+                        minlength: 2,
+                        pattern: /^[a-z0-9]+$/
 
-                    'usuario_cp': {
-                        required: true
-                    }
+                    },
+                    'usuario-confirmacion': {
+                        required: true,
+                        equalTo: '#usuario-password',
+                        pattern: /^[a-z0-9]+$/
+
+                    },
+                    'usuario-nombreCompleto': {
+                        required: true,
+                        pattern: /^[a-z ,.'-]+$/
+                    },
+                    'usuario-nivel': {
+                        required: true,
+                        number: true
+                    },
+                    agree: 'required'
                 },
                 messages: {
-                    'usuario_nombre': {
-                        required: "Ingresa el nombre del usuario",
+                    'usuario-id': {
+                        required: "ingresa una id",
+                        digits: "utiliza solo digitos"
                     },
-                    'usuario_direccion': {
-                        required: "Ingresa la dirección",
+                    'usuario-username': {
+                        required: "ingresa un nombre de usuario",
+                        pattern: "utiliza solo digitos y letras"
                     },
-                    'usuario_cp': {
-                        required: "Ingresa un codigo postal"
+                    'usuario-password': {
+                        required: "ingresa una contraseña",
+                        minlength: "necesita mas de 2 caracteres",
+                        pattern: "utiliza solo digitos y letras"
+                    },
+                    'usuario-confirmacion': {
+                        required: "vuelve a ingresar la contraseña",
+                        minlength: "necesita mas de 2 caracteres",
+                        pattern: "utiliza solo digitos y letras",
+                        equalTo: 'no coincide'
+                    },
+                    'usuario-nombreCompleto': {
+                        required: "ingresa un nombre",
+                        pattern: "Utiliza solo caracteres"
+                    },
+                    'usuario-nivel': {
+                        required: "ingresa un nivel",
+                        number: "utiliza solo numeros"
                     }
                 },
                 errorElement: "em",

@@ -7,7 +7,6 @@
     </div>
 </footer>
 
-<script src="../js/bs/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -16,11 +16,8 @@
     <script src='<?= URLROOT ?>/js/jquery/jquery-3.6.1.min.js'></script>
     <script src='<?= URLROOT ?>/js/jquery-validation/jquery.validate.min.js'></script>
     <script src='<?= URLROOT ?>/js/jquery-validation/additional-methods.min.js'></script>
-    <style>
-        .rojo {
-            color: red;
-        }
-    </style>
+    <script src="../js/bs/js/bootstrap.bundle.min.js"></script>
+   
 </head>
 
 <body class="d-flex flex-column h-100">
