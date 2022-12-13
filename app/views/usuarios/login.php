@@ -1,5 +1,5 @@
 <?php
-include_once APPROOT . '/views/includes/header.inc.php';
+include_once APPROOT . '/views/includes/alt_header.inc.php';
 ?>
 <!-- para recibir emsansjes -->
 
