@@ -21,15 +21,15 @@ if (estaLogueado()) {
             <!-- ========== Start Section ======== poner verificacion== -->
             <div class="mb-3">
                 <label for="prov_nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="prov_nombre" id="nombre" placeholder="">
+                <input type="text" class="form-control" name="prov_nombre" id="prov_nombre" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="prov_direccion" class="form-label">Direcci&oacute;n</label>
-                <input type="text" class="form-control" name="prov_direccion" id="direccion" placeholder="">
+                <input type="text" class="form-control" name="prov_direccion" id="prov_direccion" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="prov_cp" class="form-label">CP</label>
-                <input type="text" class="form-control" name="prov_cp" id="cp" placeholder="">
+                <input type="text" class="form-control" name="prov_cp" id="prov_cp" placeholder="">
             </div>
 
     </div>
@@ -44,26 +44,33 @@ if (estaLogueado()) {
                 rules: {
                     'prov_nombre': {
                         required: true,
+                        pattern: /^[a-z ,.'-]+$/
                     },
-
                     'prov_direccion': {
                         required: true,
+                        pattern: /^[#.0-9a-zA-Z\s,-]+$/
                     },
-
                     'prov_cp': {
-                        required: true
-                    }
+                        required: true,
+                        digits: true,
+
+                    },
+                    agree: 'required'
                 },
                 messages: {
                     'prov_nombre': {
-                        required: "Ingresa el nombre del proveedor",
+                        required: "ingrese el nombre del proveedor",
+                        pattern: "ingrese un nombre valido"
                     },
                     'prov_direccion': {
-                        required: "Ingresa la dirección",
+                        required: "ingrese la direccion",
+                        pattern: "Ingrese una direccion valida"
                     },
                     'prov_cp': {
-                        required: "Ingresa un codigo postal"
-                    }
+                        required: "ingrese el código postal",
+                        digits: "Ingrese solo numeros",
+
+                    },
                 },
                 errorElement: "em",
                 errorPlacement: function(error, element) {

@@ -25,49 +25,82 @@ if (estaLogueado()) {
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Contraseña</label>
-                <input type="text" class="form-control" name="usuario-password" id="pass" value="" placeholder="">
+                <input type="password" class="form-control" name="usuario-password" id="usuario-password"  placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Confirmar contraseña</label>
-                <input type="text" class="form-control" name="usuario-confirmacion" id="pass2" value='' placeholder="">
+                <input type="password" class="form-control" name="usuario-confirmacion" id="usuario-confirmacion" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nombre Completo</label>
-                <input type="" class="form-control" name="usuario-nombreCompleto" id="cp" value='<?= $data->usuario_nombreCompleto ?>' placeholder="">
+                <input type="text" class="form-control" name="usuario-nombreCompleto" id="usuario-nombreCompleto" value='<?= $data->usuario_nombreCompleto ?>' placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nivel</label>
                 <input type="text" class="form-control" name="usuario-nivel" id="nivel" value='<?= $data->usuario_nivel ?>' placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary">Editar</button>
-        </form>
+
+
+    </div>
+    <button type="submit" class="btn btn-primary">Editar</button>
+    </form>
     </div>
 
     <script>
         $(document).ready(function() {
             $("#datos form").validate({
                 rules: {
-                    'usuario_nombre': {
-                        required: true,
-                    },
 
-                    'usuario_direccion': {
+                    'usuario-username': {
                         required: true,
+                        pattern: /^[a-z0-9]+$/
                     },
+                    'usuario-password': {
+                        required: true,
+                        minlength: 2,
+                        pattern: /^[a-z0-9]+$/
 
-                    'usuario_cp': {
-                        required: true
-                    }
+                    },
+                    'usuario-confirmacion': {
+                        required: true,
+                        equalTo: '#usuario-password',
+                        pattern: /^[a-z0-9]+$/
+
+                    },
+                    'usuario-nombreCompleto': {
+                        required: true,
+                        pattern: /^[a-z ,.'-]+$/
+                    },
+                    'usuario-nivel': {
+                        required: true,
+                        number: true
+                    },
+                    agree: 'required'
                 },
                 messages: {
-                    'usuario_nombre': {
-                        required: "Ingresa el nombre del usuario",
+
+                    'usuario-username': {
+                        required: "ingresa un nombre de usuario",
+                        pattern: "utiliza solo digitos y letras"
                     },
-                    'usuario_direccion': {
-                        required: "Ingresa la dirección",
+                    'usuario-password': {
+                        required: "ingresa una contraseña",
+                        minlength: "necesita mas de 2 caracteres",
+                        pattern: "utiliza solo digitos y letras"
                     },
-                    'usuario_cp': {
-                        required: "Ingresa un codigo postal"
+                    'usuario-confirmacion': {
+                        required: "vuelve a ingresar la contraseña",
+                        minlength: "necesita mas de 2 caracteres",
+                        pattern: "utiliza solo digitos y letras",
+                        equalTo: 'no coincide'
+                    },
+                    'usuario-nombreCompleto': {
+                        required: "ingresa un nombre",
+                        pattern: "Utiliza solo caracteres"
+                    },
+                    'usuario-nivel': {
+                        required: "ingresa un nivel",
+                        number: "utiliza solo numeros"
                     }
                 },
                 errorElement: "em",

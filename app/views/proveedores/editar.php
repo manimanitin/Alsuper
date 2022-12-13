@@ -39,39 +39,35 @@ if (estaLogueado()) {
         $(document).ready(function() {
             $("#datos form").validate({
                 rules: {
-
                     'prov_nombre': {
                         required: true,
+                        pattern: /^[a-z ,.'-]+$/
                     },
                     'prov_direccion': {
                         required: true,
+                        pattern: /^[#.0-9a-zA-Z\s,-]+$/
                     },
-
                     'prov_cp': {
-                        required: true
+                        required: true,
+                        digits: true,
+
                     },
                     agree: 'required'
                 },
                 messages: {
-                    'prov_rfc': {
-                        required: "ingresa rfc",
-                    },
                     'prov_nombre': {
-                        required: "ingresa nombre",
+                        required: "ingrese el nombre del proveedor",
+                        pattern: "ingrese un nombre valido"
                     },
                     'prov_direccion': {
-                        required: "ingresa direccion",
-                    },
-                    'prov_telefono': {
-                        required: "ingresa telefono",
-                    },
-                    'prov_correo': {
-                        require: "ingresa correo",
-                        email: "ingresa correo",
+                        required: "ingrese la direccion",
+                        pattern: "Ingrese una direccion valida"
                     },
                     'prov_cp': {
-                        required: "ingresa codigo postal"
-                    }
+                        required: "ingrese el código postal",
+                        digits: "Ingrese solo numeros",
+
+                    },
                 },
                 errorElement: "em",
                 errorPlacement: function(error, element) {

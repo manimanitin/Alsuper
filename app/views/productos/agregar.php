@@ -72,27 +72,40 @@ if (estaLogueado()) {
         $(document).ready(function() {
             $("#datos form").validate({
                 rules: {
-                    'producto_nombre': {
+                    'producto-nombre': {
+                        required: true,
+                        pattern: /^[a-z0-9 ,.'-]+$/
+                    },
+                    'producto-stock': {
+                        required: true,
+                        digits: true
+                    },
+                    'producto-precio': {
+                        required: true,
+                        digits: true,
+
+                    },
+                    'producto-fecha': {
                         required: true,
                     },
-
-                    'producto_direccion': {
-                        required: true,
-                    },
-
-                    'producto_cp': {
-                        required: true
-                    }
+                    agree: 'required'
                 },
                 messages: {
-                    'producto_nombre': {
-                        required: "Ingresa el nombre del producto",
+                    'producto-nombre': {
+                        required: "ingrese un nombre",
+                        pattern: "ngrese un nombre valido"
                     },
-                    'producto_direccion': {
-                        required: "Ingresa la dirección",
+                    'producto-stock': {
+                        required: "ingrese el stock",
+                        digits: "ingrese solo digitos"
                     },
-                    'producto_cp': {
-                        required: "Ingresa un codigo postal"
+                    'producto-precio': {
+                        required: "ingrese el precio",
+                        digits: "ingrese solo digitos"
+
+                    },
+                    'producto-fecha': {
+                        required: "ingrese una fecha",
                     }
                 },
                 errorElement: "em",
