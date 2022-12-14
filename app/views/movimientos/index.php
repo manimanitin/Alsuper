@@ -55,7 +55,7 @@ if (estaLogueado()) {
 
             <div id="semana">
                 <div class="mb-3">
-                    <label for="" class="form-label">Fecha</label>
+                    <label for="" class="form-label">Día</label>
                     <input type="date" class="form-control" name="mov-fecha" id="semSemana" placeholder="">
                 </div>
             </div>
@@ -67,7 +67,7 @@ if (estaLogueado()) {
     </form>
 
 
-    <div class="row mt-3 mb-3">
+    <div class="row mt-3 mb-3 justify-content-end">
         <!-- <div class="col-sm-11">
                 <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/csv">Exportar a CSV</a>
                 <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/json">Exportar a JSON</a>
