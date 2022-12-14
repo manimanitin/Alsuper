@@ -116,6 +116,31 @@ class Movimiento
         return $this->db->unico();
     }
 
+    public function verificarStock($prod_id)
+    {
+        $this->db->query('SELECT producto_stock FROM productos WHERE id=:id');
+        $this->db->bind(':id', $prod_id);
+        #  return ($this->db->execute()) ? true : false;
+        return $this->db->unico();
+    }
+
+    public function actualizarStock($data){
+        $this->db->query('UPDATE productos set producto_stock=producto_stock-:cantidad WHERE id=:id');
+        $this->db->bind(':id', $data['producto_id']);
+        $this->db->bind(':cantidad', $data['mov_cantidad']);
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $evt) {
+            echo '<pre>';
+            print_r($evt);
+            echo '<pre>';
+            return false;
+        }
+
+    }
+
+
     // public function buscarMovimientoPorIdoMovimiento($id,$user)
     // {
     //     $this->db->query('SELECT id,mov_id,mov_username,mov_password,mov_nombreCompleto,mov_nivel from movimientos where id = :id or mov_username=:mov_username');

@@ -24,23 +24,33 @@ class Movimientos extends Controller
             'mov_fecha' => '',
             'prod' => $this->productoModel->listarProductos()
         ];
-      
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             # $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING,);
 
             $data = [
                 'producto_id' => $_POST['producto-id'],
                 'mov_cantidad' => $_POST['mov-cantidad'],
-                'mov_fecha' => $_POST['mov-fecha']
-            ];
-            //se puede hacer doble validacion
+                'mov_fecha' => $_POST['mov-fecha'],
+                'prod' => $this->productoModel->listarProductos()
 
-            if (empty($data['msg_error'])) {
-                if ($this->movimientoModel->agregar($data)) {
-                    redirigir("/movimientos/index");
-                } else {
-                    $data['msg_error'] = 'algo salio mal';
+            ];
+
+            $stock=($this->movimientoModel->verificarStock($data['producto_id']))->producto_stock;
+            // print_r($data['mov_cantidad']);
+            // print_r($stock);
+
+            if ($stock >= $data['mov_cantidad']) {
+                if (empty($data['msg_error'])) {
+                    $this->movimientoModel->actualizarStock($data);
+                    if ($this->movimientoModel->agregar($data)) {
+                        redirigir("/movimientos/index");
+                    } else {
+                        $data['msg_error'] = 'algo salio mal';
+                    }
                 }
+            } else {
+                $data['msg_error'] = 'Pedido supera el stock disponible';
             }
         }
         $this->view('movimientos/agregar', $data);
