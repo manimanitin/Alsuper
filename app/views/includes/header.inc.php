@@ -42,6 +42,9 @@
                         <li class=" nav-item">
                             <a class="nav-link" href="<?= URLROOT ?>/productos/">Productos</a>
                         </li>
+                        <li class=" nav-item">
+                            <a class="nav-link" href="<?= URLROOT ?>/movimientos/">Movimientos</a>
+                        </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
                         </li> -->

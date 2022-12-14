@@ -29,11 +29,11 @@ if (estaLogueado()) {
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Contraseña</label>
-                <input type="text" class="form-control" name="usuario-password" id="usuario-password" placeholder="">
+                <input type="password" class="form-control" name="usuario-password" id="usuario-password" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Confirmar contraseña</label>
-                <input type="text" class="form-control" name="usuario-confirmacion" id="usuario-confirmacion" placeholder="">
+                <input type="password" class="form-control" name="usuario-confirmacion" id="usuario-confirmacion" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nombre Completo</label>

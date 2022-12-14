@@ -12,29 +12,45 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 <?php
 if (estaLogueado()) {
     # code...
-
+    // print_r($data['prod']);
 ?>
     <div id="datos">
+
         <form action="<?=
                         URLROOT;
-                        ?>/proveedores/agregar" method="POST" enctype="multipart/form-data">
+                        ?>/movimientos/agregar" method="POST" enctype="multipart/form-data">
             <!-- ========== Start Section ======== poner verificacion== -->
-            <div class="mb-3">
-                <label for="prov_nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="prov_nombre" id="prov_nombre" placeholder="">
-            </div>
-            <div class="mb-3">
-                <label for="prov_direccion" class="form-label">Direcci&oacute;n</label>
-                <input type="text" class="form-control" name="prov_direccion" id="prov_direccion" placeholder="">
-            </div>
-            <div class="mb-3">
-                <label for="prov_cp" class="form-label">CP</label>
-                <input type="text" class="form-control" name="prov_cp" id="prov_cp" placeholder="">
-            </div>
 
+            <div class="mb-3">
+                <label for="" class="form-label">Producto</label>
+                <br>
+                <select name="producto-id">
+                    <?php
+                    foreach ($data['prod'] as $registro) {
+                    ?>
+                        <option value="<?php echo $registro->id; ?>">
+                            <?php echo $registro->producto_nombre;
+                            ?>
+                        </option>
+                    <?php
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Cantidad</label>
+                <input type="text" class="form-control" name="mov-cantidad" id="username" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Fecha</label>
+                <input type="date" class="form-control" name="mov-fecha" id="pass" placeholder="">
+            </div>
+            <div class="mb-3">
+
+                <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
     <br>
 
@@ -42,35 +58,28 @@ if (estaLogueado()) {
         $(document).ready(function() {
             $("#datos form").validate({
                 rules: {
-                    'prov_nombre': {
+                    'producto_nombre': {
                         required: true,
-                        pattern: /^[a-z ,.'-]+$/
                     },
-                    'prov_direccion': {
-                        required: true,
-                        pattern: /^[#.0-9a-zA-Z\s,-]+$/
-                    },
-                    'prov_cp': {
-                        required: true,
-                        digits: true,
 
+                    'producto_direccion': {
+                        required: true,
                     },
-                    agree: 'required'
+
+                    'producto_cp': {
+                        required: true
+                    }
                 },
                 messages: {
-                    'prov_nombre': {
-                        required: "ingrese el nombre del proveedor",
-                        pattern: "ingrese un nombre valido"
+                    'producto_nombre': {
+                        required: "Ingresa el nombre del producto",
                     },
-                    'prov_direccion': {
-                        required: "ingrese la direccion",
-                        pattern: "Ingrese una direccion valida"
+                    'producto_direccion': {
+                        required: "Ingresa la dirección",
                     },
-                    'prov_cp': {
-                        required: "ingrese el código postal",
-                        digits: "Ingrese solo numeros",
-
-                    },
+                    'producto_cp': {
+                        required: "Ingresa un codigo postal"
+                    }
                 },
                 errorElement: "em",
                 errorPlacement: function(error, element) {
