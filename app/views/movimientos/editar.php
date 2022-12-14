@@ -7,20 +7,22 @@ include_once APPROOT . '/views/includes/header.inc.php';
 if (isset($data->msg_error) && $data->msg_error != '') {
     echo '<div class="alert alert-warning">' . $data->msg_error . '</div>';
 }
-// print_r($data->prod);
+// print_r($data);
 ?>
 <?php
 if (estaLogueado()) {
-    //var_dump($data->id)
+    // var_dump($data);
 ?>
     <div id="datos">
         <form action="<?= URLROOT; ?>/movimientos/editar/<?= $data->id; ?>" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= $data->id; ?>">
+            <input type="hidden" name="producto-id" value="<?= $data->producto_id; ?>">
+
 
             <div class="mb-3">
-                <label for="" class="form-label">Proveedor</label>
+                <label for="" class="form-label">Producto</label>
                 <br>
-                <select name="producto-id">
+                <select disabled name="">
                     <?php
                     foreach ($data->prod as $registro) {
                     ?>
