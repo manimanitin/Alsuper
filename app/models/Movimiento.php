@@ -26,7 +26,7 @@ class Movimiento
 
     public function reporteAnual($data)
     {
-        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE YEAR(mov_fecha=:anno');
+        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE YEAR(mov_fecha)=:anno');
         $this->db->bind(':anno', $data['year']);
 
         $registro = $this->db->multiple();

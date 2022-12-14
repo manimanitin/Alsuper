@@ -23,6 +23,31 @@ class Movimientos extends Controller
         $this->view('/movimientos/mes', $movimientos);
     }
 
+    public function anno($year)
+    {
+        $data = [
+            'year' => $year,
+        ];
+
+        $movimientos = $this->movimientoModel->reporteAnual($data);
+        $this->view('/movimientos/mes', $movimientos);
+    }
+    public function semana($year, $month, $day)
+    {
+        $fecha = new DateTime();
+        $fecha->setDate($year, $month, $day);
+        $fechamas = new DateTime();
+        $fechamas->setDate($year, $month, $day);
+        $fechamas = $fechamas->add(DateInterval::createFromDateString('1 week'));
+        $data = [
+            'primera' => $fecha->format("Y-m-d"),
+            'segunda' => $fechamas->format("Y-m-d")
+        ];
+
+        $movimientos = $this->movimientoModel->reporteSemanal($data);
+        $this->view('/movimientos/mes', $movimientos);
+    }
+
 
     public function agregar()
     {
@@ -47,7 +72,7 @@ class Movimientos extends Controller
 
             ];
 
-            $stock=($this->movimientoModel->verificarStock($data['producto_id']))->producto_stock;
+            $stock = ($this->movimientoModel->verificarStock($data['producto_id']))->producto_stock;
             // print_r($data['mov_cantidad']);
             // print_r($stock);
 
