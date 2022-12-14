@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
-    <title>Empresas Tresequis</title>
+    <title>Alsuper</title>
     <link href="<?= URLROOT ?>/css/bs/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= URLROOT ?>/css/fa/css/all.min.css">
     <link rel="stylesheet" href="<?= URLROOT ?>/css/fa/css/fontawesome.min.css">

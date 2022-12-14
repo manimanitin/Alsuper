@@ -12,15 +12,108 @@ class Movimientos extends Controller
         $movimientos = $this->movimientoModel->listarMovimientosP($limite, $pagina);
         $this->view('/movimientos/index', $movimientos);
     }
-    public function mes($year, $month)
+    public function mes($year, $month, $archivo = '')
     {
         $data = [
             'year' => $year,
             'month' => $month,
         ];
+        switch ($archivo) {
+            case "0":
+                $movimientos = $this->movimientoModel->reporteMensual($data);
+                array_push($movimientos, $year . ' ' . $month);
+                $this->view('/movimientos/mes', $movimientos);
+                break;
+            case "1":
+                $movimientos = $this->movimientoModel->reporteMensual($data);
+                $this->view('/movimientos/csv', $movimientos);
+                break;
+            case "2":
+                $movimientos = $this->movimientoModel->reporteMensual($data);
 
-        $movimientos = $this->movimientoModel->reporteMensual($data);
-        $this->view('/movimientos/mes', $movimientos);
+                $this->view('/movimientos/json', $movimientos);
+                break;
+            case "3":
+                $movimientos = $this->movimientoModel->reporteMensual($data);
+                $this->view('/movimientos/pdf', $movimientos);
+                break;
+            default:
+                $movimientos = $this->movimientoModel->reporteMensual($data);
+                array_push($movimientos, $year . ' ' . $month);
+                $this->view('/movimientos/mes', $movimientos);
+                break;
+        }
+    }
+
+    public function anno($year, $archivo = '')
+    {
+        $data = [
+            'year' => $year,
+        ];
+
+        switch ($archivo) {
+            case "0":
+                $movimientos = $this->movimientoModel->reporteAnual($data);
+                array_push($movimientos, $year);
+                $this->view('/movimientos/anno', $movimientos);
+                break;
+            case "1":
+                $movimientos = $this->movimientoModel->reporteAnual($data);
+                $this->view('/movimientos/csv', $movimientos);
+                break;
+            case "2":
+                $movimientos = $this->movimientoModel->reporteAnual($data);
+                $this->view('/movimientos/json', $movimientos);
+                break;
+            case "3":
+                $movimientos = $this->movimientoModel->reporteAnual($data);
+
+                $this->view('/movimientos/pdf', $movimientos);
+                break;
+            default:
+                $movimientos = $this->movimientoModel->reporteAnual($data);
+                array_push($movimientos, $year);
+                $this->view('/movimientos/anno', $movimientos);
+                break;
+        }
+    }
+    public function semana($year, $month, $day, $archivo = '')
+    {
+        $fecha = new DateTime();
+        $fecha->setDate($year, $month, $day);
+        $fechamas = new DateTime();
+        $fechamas->setDate($year, $month, $day);
+        $fechamas = $fechamas->add(DateInterval::createFromDateString('1 week'));
+        $data = [
+            'primera' => $fecha->format("Y-m-d"),
+            'segunda' => $fechamas->format("Y-m-d")
+        ];
+
+        switch ($archivo) {
+            case "0":
+                $movimientos = $this->movimientoModel->reporteSemanal($data);
+                array_push($movimientos, $year . ' ' . $month . ' ' . $day);
+
+                $this->view('/movimientos/semana', $movimientos);
+                break;
+            case "1":
+                $movimientos = $this->movimientoModel->reporteSemanal($data);
+                $this->view('/movimientos/csv', $movimientos);
+                break;
+            case "2":
+                $movimientos = $this->movimientoModel->reporteSemanal($data);
+                $this->view('/movimientos/json', $movimientos);
+                break;
+            case "3":
+                $movimientos = $this->movimientoModel->reporteSemanal($data);
+                $this->view('/movimientos/pdf', $movimientos);
+                break;
+            default:
+                $movimientos = $this->movimientoModel->reporteSemanal($data);
+                array_push($movimientos, $year . ' ' . $month . ' ' . $day);
+                $this->view('/movimientos/semana', $movimientos);
+                break;
+        }
     }
 
 
