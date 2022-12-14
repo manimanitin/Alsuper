@@ -19,8 +19,8 @@ if (estaLogueado()) {
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
             <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/anno/<?= end($data) ?>/1">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/<?= end($data) ?>/2">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/<?= end($data) ?>/3">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/anno/<?= end($data) ?>/2">Exportar a JSON</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/anno/<?= end($data) ?>/3">Exportar a PDF</a>
 
         </div>
         <div class="col-sm-1">
