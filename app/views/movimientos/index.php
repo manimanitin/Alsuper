@@ -14,13 +14,74 @@ if (estaLogueado()) {
     # code...
 
 ?>
-    <div class="row mt-3 mb-3">
-        <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/csv">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/json">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/pdf">Exportar a PDF</a>
 
-        </div>
+    <div id="datos">
+        <form action="<?= URLROOT; ?>/movimientos/mes/2022/12" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                Filtrar por
+                <select id="opciones">
+                    <option value="0">
+                        -------
+                    </option>
+                    <option value="1">
+                        Año
+                    </option>
+                    <option value="2">
+                        Mes
+                    </option>
+                    <option value="3">
+                        Semana
+                    </option>
+                </select>
+            </div>
+            <div id="anno">
+                <div class="mb-3">
+                    <label for="" class="form-label">AÑO</label>
+                    <input type="text" class="form-control" name="year" id="fecha1" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">MES</label>
+                    <input type="text" class="form-control" name="month" id="fecha2" placeholder="">
+                </div>
+            </div>
+
+            <div id="mes" class="mb-3">
+                <select id="meses">
+
+                    <option value="1">
+                        enero
+                    </option>
+                    <option value="2">
+                        febrero
+                    </option>
+                    <option value="3">
+                        marzo
+                    </option>
+                </select>
+            </div>
+
+            <div id="semana">
+                <div class="mb-3">
+                    <label for="" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" name="mov-fecha" id="pass" placeholder="">
+                </div>
+            </div>
+
+            <div class="mb-3">
+
+                <button type="submit" class="btn btn-primary" id="gen">Generar reporte</button>
+        </form>
+    </div>
+    </form>
+
+
+    <div class="row mt-3 mb-3">
+        <!-- <div class="col-sm-11">
+                <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/csv">Exportar a CSV</a>
+                <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/json">Exportar a JSON</a>
+                <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/pdf">Exportar a PDF</a>
+
+            </div> -->
         <div class="col-sm-1">
             <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/agregar"><i class="fa fa-plus"></i></a>
         </div>
@@ -113,6 +174,36 @@ if (estaLogueado()) {
     <script>
         $(document).on('click', '.eliminarFila', function() {
             document.getElementById("formEliminar").action = "<?= URLROOT; ?>/movimientos/eliminar/" + $(this).data('fila');
+        });
+
+        $('#opciones').on('change', function() {
+            var valor = $('#opciones option:selected').val();
+            switch (valor) {
+                case "0":
+                    $("#anno").hide();
+                    $("#mes").hide();
+                    $("#semana").hide();
+                    break;
+                case "1":
+                    $("#anno").show();
+                    $("#mes").hide();
+                    $("#semana").hide();
+                    break;
+                case "2":
+                    $("#anno").hide();
+                    $("#mes").show();
+                    $("#semana").hide();
+                    break;
+                case "3":
+                    $("#anno").hide();
+                    $("#mes").hide();
+                    $("#semana").show();
+                    break;
+            }
+        });
+
+        $('#gen').on('click', function() {
+
         });
     </script>
 <?php

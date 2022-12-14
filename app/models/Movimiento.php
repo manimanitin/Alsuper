@@ -13,6 +13,39 @@ class Movimiento
      */
 
 
+
+
+    public function reporteMensual($data)
+    {
+        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE YEAR(mov_fecha)=:anno AND MONTH(mov_fecha)=:mes');
+        $this->db->bind(':anno', $data['year']);
+        $this->db->bind(':mes', $data['month']);
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+    public function reporteAnual($data)
+    {
+        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE YEAR(mov_fecha=:anno');
+        $this->db->bind(':anno', $data['year']);
+
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+    public function reporteSemanal($data)
+    {
+        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE DATE(mov_fecha) BETWEEN :primer AND :segun');
+        $this->db->bind('primer', $data['primera']);
+        $this->db->bind('segun', $data['segunda']);
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+
+
+
+
     public function agregar($data)
     {
 

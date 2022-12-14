@@ -13,7 +13,6 @@ class Productos extends Controller
         $this->view('/productos/index', $productos);
     }
 
-
     public function agregar()
     {
         $prov = $this->proveedorModel->listarProveedores();

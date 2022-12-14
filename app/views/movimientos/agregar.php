@@ -12,7 +12,7 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 <?php
 if (estaLogueado()) {
     # code...
-// print_r($data['prod']);
+    // print_r($data['prod']);
 ?>
     <div id="datos">
 
@@ -28,7 +28,7 @@ if (estaLogueado()) {
                     <?php
                     foreach ($data['prod'] as $registro) {
                     ?>
-                        <option value="<?php echo $registro->id;?>" >
+                        <option value="<?php echo $registro->id; ?>">
                             <?php echo $registro->producto_nombre;
                             ?>
                         </option>

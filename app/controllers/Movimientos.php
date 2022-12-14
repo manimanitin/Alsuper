@@ -12,6 +12,16 @@ class Movimientos extends Controller
         $movimientos = $this->movimientoModel->listarMovimientosP($limite, $pagina);
         $this->view('/movimientos/index', $movimientos);
     }
+    public function mes($year, $month)
+    {
+        $data = [
+            'year' => $year,
+            'month' => $month,
+        ];
+
+        $movimientos = $this->movimientoModel->reporteMensual($data);
+        $this->view('/movimientos/mes', $movimientos);
+    }
 
 
     public function agregar()
@@ -23,6 +33,7 @@ class Movimientos extends Controller
             'mov_cantidad' => '',
             'mov_fecha' => '',
             'prod' => $this->productoModel->listarProductos()
+
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
