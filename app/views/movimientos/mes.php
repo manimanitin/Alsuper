@@ -11,15 +11,16 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 
 <?php
 if (estaLogueado()) {
+    $datos = explode(' ', end($data));
 ?>
 
 
 
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $data[3] ?>/<?= $data[4] ?>/1">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $data[3] ?>/<?= $data[4] ?>/2">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $data[3] ?>/<?= $data[4] ?>/3">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/1">Exportar a CSV</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/2">Exportar a JSON</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/3">Exportar a PDF</a>
 
         </div>
 

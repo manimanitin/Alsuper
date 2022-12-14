@@ -11,7 +11,7 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 
 <?php
 if (estaLogueado()) {
-    # code...
+    $datos = explode(' ', end($data));
 
 ?>
 
@@ -19,9 +19,9 @@ if (estaLogueado()) {
 
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/semana/<?= $data[2] ?>/<?= $data[3] ?>/<?= $data[4] ?>/1">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/semana/<?= $data[2] ?>/<?= $data[3] ?>/<?= $data[4] ?>/2">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/semana/<?= $data[2] ?>/<?= $data[3] ?>/<?= $data[4] ?>/3">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/semana/<?= $datos[0] ?>/<?= $datos[1] ?>/<?= $datos[2] ?>/1">Exportar a CSV</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/semana/<?= $datos[0] ?>/<?= $datos[1] ?>/<?= $datos[2] ?>/2">Exportar a JSON</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/semana/<?= $datos[0] ?>/<?= $datos[1] ?>/<?= $datos[2] ?>/3">Exportar a PDF</a>
 
         </div>
         <div class="col-sm-1">

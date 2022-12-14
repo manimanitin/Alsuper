@@ -21,8 +21,7 @@ class Movimientos extends Controller
         switch ($archivo) {
             case "0":
                 $movimientos = $this->movimientoModel->reporteMensual($data);
-                array_push($movimientos, $year);
-                array_push($movimientos,  $month);
+                array_push($movimientos, $year . ' ' . $month);
                 $this->view('/movimientos/mes', $movimientos);
                 break;
             case "1":
@@ -41,8 +40,7 @@ class Movimientos extends Controller
                 break;
             default:
                 $movimientos = $this->movimientoModel->reporteMensual($data);
-                array_push($movimientos, $year);
-                array_push($movimientos,  $month);
+                array_push($movimientos, $year . ' ' . $month);
                 $this->view('/movimientos/mes', $movimientos);
                 break;
         }
@@ -95,9 +93,8 @@ class Movimientos extends Controller
         switch ($archivo) {
             case "0":
                 $movimientos = $this->movimientoModel->reporteSemanal($data);
-                array_push($movimientos, $year);
-                array_push($movimientos,  $month);
-                array_push($movimientos,  $day);
+                array_push($movimientos, $year . ' ' . $month . ' ' . $day);
+
                 $this->view('/movimientos/semana', $movimientos);
                 break;
             case "1":
@@ -115,9 +112,7 @@ class Movimientos extends Controller
                 break;
             default:
                 $movimientos = $this->movimientoModel->reporteSemanal($data);
-                array_push($movimientos, $year);
-                array_push($movimientos,  $month);
-                array_push($movimientos,  $day);
+                array_push($movimientos, $year . ' ' . $month . ' ' . $day);
                 $this->view('/movimientos/semana', $movimientos);
                 break;
         }
