@@ -26,7 +26,6 @@ class Movimientos extends Controller
                 break;
             case "1":
                 $movimientos = $this->movimientoModel->reporteMensual($data);
-
                 $this->view('/movimientos/csv', $movimientos);
                 break;
             case "2":
@@ -103,7 +102,6 @@ class Movimientos extends Controller
                 break;
             case "2":
                 $movimientos = $this->movimientoModel->reporteSemanal($data);
-
                 $this->view('/movimientos/json', $movimientos);
                 break;
             case "3":

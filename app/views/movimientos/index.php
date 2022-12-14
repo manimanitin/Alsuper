@@ -37,7 +37,7 @@ if (estaLogueado()) {
             <div id="anno">
                 <div class="mb-3">
                     <label for="" class="form-label">AÑO</label>
-                    <input type="text" class="form-control" name="year" id="anAnno" placeholder="">
+                    <input type="text" class="form-control" name="yeary" id="anAnno" placeholder="">
                 </div>
 
             </div>
@@ -45,18 +45,18 @@ if (estaLogueado()) {
             <div id="mes" class="mb-3">
                 <div class="mb-3">
                     <label for="" class="form-label">AÑO</label>
-                    <input type="text" class="form-control" name="year" id="mesAnno" placeholder="">
+                    <input type="text" class="form-control" name="yearm" id="mesAnno" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">MES</label>
-                    <input type="text" class="form-control" name="month" id="mesMes" placeholder="">
+                    <input type="text" class="form-control" name="monthm" id="mesMes" placeholder="">
                 </div>
             </div>
 
             <div id="semana">
                 <div class="mb-3">
                     <label for="" class="form-label">Día</label>
-                    <input type="date" class="form-control" name="mov-fecha" id="semSemana" placeholder="">
+                    <input type="date" class="form-control" name="week" id="semSemana" placeholder="">
                 </div>
             </div>
 
@@ -86,7 +86,6 @@ if (estaLogueado()) {
             <tbody>
                 <th>ID</th>
                 <th>Producto_id</th>
-                <!-- <th>Contraseña</th> -->
                 <th>Cantidad</th>
                 <th>Fecha</th>
                 <th></th>
@@ -230,6 +229,58 @@ if (estaLogueado()) {
 
                     break;
             }
+        });
+
+        $(document).ready(function() {
+            $("#datos form").validate({
+                rules: {
+                    'yeary': {
+                        digits: true
+                    },
+                    'yearm': {
+                        digits: true
+                    },
+                    'monthm': {
+                        digits: true
+                    },
+                    'week': {
+                        required: true
+                    },
+
+                    agree: 'required'
+                },
+                messages: {
+                    'yeary': {
+                        digits: "Solo números"
+                    },
+                    'yearm': {
+                        digits: "Solo números"
+                    },
+                    'monthm': {
+                        digits: "Solo números"
+                    },
+                    'week': {
+                        required: "Ingrese una fecha"
+                    },
+                },
+                errorElement: "em",
+                errorPlacement: function(error, element) {
+                    // Add the `invalid-feedback` class to the error element
+                    error.addClass("invalid-feedback");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.next("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
         });
     </script>
 <?php
