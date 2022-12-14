@@ -11,17 +11,15 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 
 <?php
 if (estaLogueado()) {
-    # code...
-
 ?>
 
 
 
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/csv">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/json">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/pdf">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $data[3] ?>/<?= $data[4] ?>/1">Exportar a CSV</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $data[3] ?>/<?= $data[4] ?>/2">Exportar a JSON</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $data[3] ?>/<?= $data[4] ?>/3">Exportar a PDF</a>
 
         </div>
 
@@ -38,6 +36,9 @@ if (estaLogueado()) {
                 <th>Fecha</th>
                 <?php
                 foreach ($data as $registro) {
+                    if (!isset($registro->id)) {
+                        break;
+                    }
                 ?>
 
                     <tr>
@@ -56,7 +57,7 @@ if (estaLogueado()) {
             </tfoot>
         </table>
     </div>
-    
+
 
     <!-- MODAL ELIMINAR-->
     <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">

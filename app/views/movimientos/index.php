@@ -168,6 +168,7 @@ if (estaLogueado()) {
             $("#anno").hide();
             $("#mes").hide();
             $("#semana").hide();
+            $("#gen").hide();
         })
 
         $(document).on('click', '.eliminarFila', function() {
@@ -183,21 +184,28 @@ if (estaLogueado()) {
                     $("#anno").hide();
                     $("#mes").hide();
                     $("#semana").hide();
+                    $("#gen").hide();
+
                     break;
                 case "1":
                     $("#anno").show();
                     $("#mes").hide();
                     $("#semana").hide();
+                    $("#gen").show();
+
                     break;
                 case "2":
                     $("#anno").hide();
                     $("#mes").show();
                     $("#semana").hide();
+                    $("#gen").show();
+
                     break;
                 case "3":
                     $("#anno").hide();
                     $("#mes").hide();
                     $("#semana").show();
+                    $("#gen").show();
                     break;
             }
         });
