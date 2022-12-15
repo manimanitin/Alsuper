@@ -12,6 +12,34 @@ class Producto
      * 
      */
 
+    public function reporteMensual($data)
+    {
+        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos WHERE YEAR(producto_fecha)=:anno AND MONTH(producto_fecha)=:mes');
+        $this->db->bind(':anno', $data['year']);
+        $this->db->bind(':mes', $data['month']);
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+    public function reporteAnual($data)
+    {
+        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos WHERE YEAR(producto_fecha)=:anno');
+        $this->db->bind(':anno', $data['year']);
+
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+    public function reporteSemanal($data)
+    {
+        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos WHERE DATE(producto_fecha) BETWEEN :primer AND :segun');
+        $this->db->bind('primer', $data['primera']);
+        $this->db->bind('segun', $data['segunda']);
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+
     public function buscarProductoPorCorreoProductoID($producto_id, $producto_username)
     {
         $this->db->query('SELECT 

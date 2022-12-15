@@ -13,6 +13,113 @@ class Productos extends Controller
         $this->view('/productos/index', $productos);
     }
 
+
+    public function mes($year, $month, $archivo = '')
+    {
+        $data = [
+            'year' => $year,
+            'month' => $month,
+        ];
+        switch ($archivo) {
+            case "0":
+                $productos = $this->productoModel->reporteMensual($data);
+                array_push($productos, $year . ' ' . $month);
+                $this->view('/productos/mes', $productos);
+                break;
+            case "1":
+                $productos = $this->productoModel->reporteMensual($data);
+                $this->view('/productos/csv', $productos);
+                break;
+            case "2":
+                $productos = $this->productoModel->reporteMensual($data);
+
+                $this->view('/productos/json', $productos);
+                break;
+            case "3":
+                $productos = $this->productoModel->reporteMensual($data);
+                $this->view('/productos/pdf', $productos);
+                break;
+            default:
+                $productos = $this->productoModel->reporteMensual($data);
+                array_push($productos, $year . ' ' . $month);
+                $this->view('/productos/mes', $productos);
+                break;
+        }
+    }
+
+    public function anno($year, $archivo = '')
+    {
+        $data = [
+            'year' => $year,
+        ];
+
+        switch ($archivo) {
+            case "0":
+                $productos = $this->productoModel->reporteAnual($data);
+                array_push($productos, $year);
+                $this->view('/productos/anno', $productos);
+                break;
+            case "1":
+                $productos = $this->productoModel->reporteAnual($data);
+                $this->view('/productos/csv', $productos);
+                break;
+            case "2":
+                $productos = $this->productoModel->reporteAnual($data);
+                $this->view('/productos/json', $productos);
+                break;
+            case "3":
+                $productos = $this->productoModel->reporteAnual($data);
+
+                $this->view('/productos/pdf', $productos);
+                break;
+            default:
+                $productos = $this->productoModel->reporteAnual($data);
+                array_push($productos, $year);
+                $this->view('/productos/anno', $productos);
+                break;
+        }
+    }
+    public function semana($year, $month, $day, $archivo = '')
+    {
+        $fecha = new DateTime();
+        $fecha->setDate($year, $month, $day);
+        $fechamas = new DateTime();
+        $fechamas->setDate($year, $month, $day);
+        $fechamas = $fechamas->add(DateInterval::createFromDateString('1 week'));
+        $data = [
+            'primera' => $fecha->format("Y-m-d"),
+            'segunda' => $fechamas->format("Y-m-d")
+        ];
+
+        switch ($archivo) {
+            case "0":
+                $productos = $this->productoModel->reporteSemanal($data);
+                array_push($productos, $year . ' ' . $month . ' ' . $day);
+
+                $this->view('/productos/semana', $productos);
+                break;
+            case "1":
+                $productos = $this->productoModel->reporteSemanal($data);
+                $this->view('/productos/csv', $productos);
+                break;
+            case "2":
+                $productos = $this->productoModel->reporteSemanal($data);
+                $this->view('/productos/json', $productos);
+                break;
+            case "3":
+                $productos = $this->productoModel->reporteSemanal($data);
+                $this->view('/productos/pdf', $productos);
+                break;
+            default:
+                $productos = $this->productoModel->reporteSemanal($data);
+                array_push($productos, $year . ' ' . $month . ' ' . $day);
+                $this->view('/productos/semana', $productos);
+                break;
+        }
+    }
+
+
+
     public function agregar()
     {
         $prov = $this->proveedorModel->listarProveedores();

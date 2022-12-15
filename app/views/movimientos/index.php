@@ -61,7 +61,7 @@ if (estaLogueado()) {
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" id="gen">Generar reporte</button>
+                <button type="submit" class="btn btn-primary" id="gen">Filtrar</button>
         </form>
     </div>
     </form>
