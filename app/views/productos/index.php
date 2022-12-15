@@ -37,6 +37,7 @@ if (estaLogueado()) {
                 <th>Stock</th>
                 <th>ID Proveedor</th>
                 <th>Precio</th>
+                <th>Fecha</th>
                 <th>Foto</th>
                 <?php
                 foreach ($data['productos'] as $registro) {
@@ -48,6 +49,8 @@ if (estaLogueado()) {
                         <td><?php echo $registro->producto_stock; ?></td>
                         <td><?php echo $registro->proveedor_id; ?></td>
                         <td><?php echo $registro->producto_precio; ?></td>
+                        <td><?php echo $registro->producto_fecha; ?></td>
+
                         <td><img src="data:image/png;base64,<?php echo base64_encode($registro->producto_foto); ?>" height="30" width="30" alt="Foto"></td>
 
 
