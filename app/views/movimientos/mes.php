@@ -23,6 +23,9 @@ if (estaLogueado()) {
             <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/3">Exportar a PDF</a>
 
         </div>
+        <div class="col-sm-1">
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/agregar"><i class="fa fa-plus"></i></a>
+        </div>
 
     </div>
 
@@ -35,6 +38,7 @@ if (estaLogueado()) {
                 <!-- <th>Contraseña</th> -->
                 <th>Cantidad</th>
                 <th>Fecha</th>
+                <th></th>
                 <?php
                 foreach ($data as $registro) {
                     if (!isset($registro->id)) {
@@ -47,7 +51,13 @@ if (estaLogueado()) {
                         <td><?php echo $registro->producto_id; ?></td>
                         <td><?php echo $registro->mov_cantidad; ?></td>
                         <td><?php echo $registro->mov_fecha; ?></td>
+                        <td>
+                            <a href="<?= URLROOT; ?>/movimientos/editar/<?= $registro->id; ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
 
+                            <a type='button' href="#" class="btn btn-danger btn-sm eliminarFila" data-bs-toggle="modal" data-bs-target="#modalEliminar" data-fila=<?php echo $registro->id; ?>>
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>

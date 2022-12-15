@@ -16,9 +16,6 @@ if (estaLogueado()) {
 ?>
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/proveedores/csv">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/proveedores/json">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/proveedores/pdf">Exportar a PDF</a>
 
         </div>
         <div class="col-sm-1">
