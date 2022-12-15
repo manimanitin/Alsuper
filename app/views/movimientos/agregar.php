@@ -58,27 +58,26 @@ if (estaLogueado()) {
         $(document).ready(function() {
             $("#datos form").validate({
                 rules: {
-                    'producto_nombre': {
-                        required: true,
-                    },
 
-                    'producto_direccion': {
-                        required: true,
+                    'mov-cantidad': {
+                        required:true,
+                        digits: true
                     },
-
-                    'producto_cp': {
+                    'mov-fecha': {
                         required: true
-                    }
+                    },
+
+
+                    agree: 'required'
                 },
                 messages: {
-                    'producto_nombre': {
-                        required: "Ingresa el nombre del producto",
+
+                    'mov-cantidad': {
+                        required:'Ingrese la cantidad',
+                        digits: "Solo números"
                     },
-                    'producto_direccion': {
-                        required: "Ingresa la dirección",
-                    },
-                    'producto_cp': {
-                        required: "Ingresa un codigo postal"
+                    'mov-fecha': {
+                        required:'Ingrese la fecha',
                     }
                 },
                 errorElement: "em",
