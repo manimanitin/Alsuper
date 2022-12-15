@@ -104,6 +104,8 @@ class Usuarios extends Controller
         $_SESSION['usuario_id'] = $usuario->usuario_id;
         $_SESSION['usuario_username'] = $usuario->usuario_username;
         $_SESSION['usuario_nombreCompleto'] = $usuario->usuario_nombreCompleto;
+        $_SESSION['usuario_nivel'] = $usuario->usuario_nivel;
+
         redirigir('/');
     }
     public function logout()

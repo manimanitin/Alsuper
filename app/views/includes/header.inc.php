@@ -17,7 +17,7 @@
     <script src='<?= URLROOT ?>/js/jquery-validation/jquery.validate.min.js'></script>
     <script src='<?= URLROOT ?>/js/jquery-validation/additional-methods.min.js'></script>
     <script src="<?= URLROOT ?>/js/bs/js/bootstrap.bundle.min.js"></script>
-   
+
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -26,29 +26,35 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark bg-danger">
             <div class="container-fluid">
+
                 <a class="navbar-brand" href="<?= URLROOT ?>"><img src="<?= URLROOT ?>/images/alsuper-logo.png" height="60"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <?php
+                        if (estaLogueado()) {
+                            if ($_SESSION['usuario_nivel'] == 1) {
 
-                        <li class=" nav-item">
-                            <a class="nav-link" href="<?= URLROOT ?>/usuarios/">Usuarios</a>
-                        </li>
-                        <li class=" nav-item">
-                            <a class="nav-link" href="<?= URLROOT ?>/proveedores/">Proveedores</a>
-                        </li>
-                        <li class=" nav-item">
-                            <a class="nav-link" href="<?= URLROOT ?>/productos/">Productos</a>
-                        </li>
-                        <li class=" nav-item">
-                            <a class="nav-link" href="<?= URLROOT ?>/movimientos/">Movimientos</a>
-                        </li>
-                        <!-- <li class="nav-item">
+                        ?>
+                                <li class=" nav-item">
+                                    <a class="nav-link" href="<?= URLROOT ?>/usuarios/">Usuarios</a>
+                                </li>
+                                <li class=" nav-item">
+                                    <a class="nav-link" href="<?= URLROOT ?>/proveedores/">Proveedores</a>
+                                </li>
+                            <?php } ?>
+                            <li class=" nav-item">
+                                <a class="nav-link" href="<?= URLROOT ?>/productos/">Productos</a>
+                            </li>
+                            <li class=" nav-item">
+                                <a class="nav-link" href="<?= URLROOT ?>/movimientos/">Movimientos</a>
+                            </li>
+                            <!-- <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
                         </li> -->
-                        <!-- <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 productos1
                             </a>
@@ -68,25 +74,31 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form> -->
                     <ul class="navbar-nav my-2 d-flex">
-                        <?php
-                        if (estaLogueado()) {
-                        ?>
 
-                            <li class="nav-item">
-                                <span class="nav-link"> <?= $_SESSION['usuario_nombreCompleto'] ?></span>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= URLROOT; ?>/usuarios/logout">Logout</a>
-                            </li>
-                        <?php
+
+                        <li class="nav-item">
+                            <span class="nav-link"> <?= $_SESSION['usuario_nombreCompleto'] ?><br>
+                                <?php
+                                if ($_SESSION['usuario_nivel'] == 1) {
+                                    echo '<i>Administrador</i>';
+                                } else {
+                                    echo '<i>Usuario</i>';
+                                }
+                                ?>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= URLROOT; ?>/usuarios/logout">Logout</a>
+                        </li>
+                    <?php
                         } else {
-                        ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= URLROOT; ?>/usuarios/login">Login</a>
-                            </li>
-                            <li class="nav-item">
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= URLROOT; ?>/">Login</a>
+                        </li>
+                        <!-- <li class="nav-item">
                                 <a class="nav-link" href="<?= URLROOT; ?>/usuarios/registro">Registro</a>
-                            </li>
+                            </li> -->
                     </ul>
                 <?php } ?>
 

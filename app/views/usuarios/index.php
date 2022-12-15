@@ -10,7 +10,7 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 ?>
 
 <?php
-if (estaLogueado()) {
+if (estaLogueado() && $_SESSION['usuario_nivel']==1) {
     # code...
 
 ?>
