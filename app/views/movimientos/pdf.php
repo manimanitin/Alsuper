@@ -37,11 +37,11 @@ footer {
     height: 2cm;
 }
 table { border-collapse: collapse; 
-    margin: 25px 0; 
-    font-size: 1em; 
-    font-family: sans-serif; min-width: 450px; 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); }
-table thead tr { background-color: #980081; color: #ffffff; text-align: middle; }
+margin: 25px 0; 
+font-size: 1em; 
+font-family: sans-serif; min-width: 450px; 
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); }
+table thead tr { background-color: #f50039; color: #ffffff; text-align: middle; }
 table th, table td { padding: 12px 15px; }
 table tbody tr { border-bottom: 1px solid #dddddd; } 
 table tbody tr:nth-of-type(even) { background-color: #f3f3f3; } 
@@ -56,7 +56,7 @@ table tbody tr:last-of-type { border-bottom: 2px solid #009879; }
 $html .= '<body>
 <!-- Defina bloques de encabezado y pie de página antes de su contenido -->
 <header>
-   <h1 class="titulo">Empresas Tecnológicas, S.A. de C.V.</h1>
+   <h1 class="titulo">Alsuper, S.A. de C.V.</h1>
 </header>
 
 <footer>
