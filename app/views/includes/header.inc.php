@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
-    <title>Empresas Tresequis</title>
+    <title>Alsuper</title>
     <link href="<?= URLROOT ?>/css/bs/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= URLROOT ?>/css/fa/css/all.min.css">
     <link rel="stylesheet" href="<?= URLROOT ?>/css/fa/css/fontawesome.min.css">
@@ -16,7 +16,7 @@
     <script src='<?= URLROOT ?>/js/jquery/jquery-3.6.1.min.js'></script>
     <script src='<?= URLROOT ?>/js/jquery-validation/jquery.validate.min.js'></script>
     <script src='<?= URLROOT ?>/js/jquery-validation/additional-methods.min.js'></script>
-    <script src="../js/bs/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= URLROOT ?>/js/bs/js/bootstrap.bundle.min.js"></script>
    
 </head>
 

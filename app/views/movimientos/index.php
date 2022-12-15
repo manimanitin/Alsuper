@@ -16,7 +16,7 @@ if (estaLogueado()) {
 ?>
 
     <div id="datos">
-        <form action="<?= URLROOT; ?>/movimientos/mes/2022/12" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 Filtrar por
                 <select id="opciones">
@@ -37,45 +37,37 @@ if (estaLogueado()) {
             <div id="anno">
                 <div class="mb-3">
                     <label for="" class="form-label">AÑO</label>
-                    <input type="text" class="form-control" name="year" id="fecha1" placeholder="">
+                    <input type="text" class="form-control" name="yeary" id="anAnno" placeholder="">
                 </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">MES</label>
-                    <input type="text" class="form-control" name="month" id="fecha2" placeholder="">
-                </div>
+
             </div>
 
             <div id="mes" class="mb-3">
-                <select id="meses">
-
-                    <option value="1">
-                        enero
-                    </option>
-                    <option value="2">
-                        febrero
-                    </option>
-                    <option value="3">
-                        marzo
-                    </option>
-                </select>
+                <div class="mb-3">
+                    <label for="" class="form-label">AÑO</label>
+                    <input type="text" class="form-control" name="yearm" id="mesAnno" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">MES</label>
+                    <input type="text" class="form-control" name="monthm" id="mesMes" placeholder="">
+                </div>
             </div>
 
             <div id="semana">
                 <div class="mb-3">
-                    <label for="" class="form-label">Fecha</label>
-                    <input type="date" class="form-control" name="mov-fecha" id="pass" placeholder="">
+                    <label for="" class="form-label">Día</label>
+                    <input type="date" class="form-control" name="week" id="semSemana" placeholder="">
                 </div>
             </div>
 
             <div class="mb-3">
-
-                <button type="submit" class="btn btn-primary" id="gen">Generar reporte</button>
+                <button type="submit" class="btn btn-primary" id="gen">Filtrar</button>
         </form>
     </div>
     </form>
 
 
-    <div class="row mt-3 mb-3">
+    <div class="row mt-3 mb-3 justify-content-end">
         <!-- <div class="col-sm-11">
                 <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/csv">Exportar a CSV</a>
                 <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/json">Exportar a JSON</a>
@@ -93,8 +85,7 @@ if (estaLogueado()) {
         <table class="table table-bordered table hover">
             <tbody>
                 <th>ID</th>
-                <th>Producto_id</th>
-                <!-- <th>Contraseña</th> -->
+                <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Fecha</th>
                 <th></th>
@@ -104,7 +95,7 @@ if (estaLogueado()) {
 
                     <tr>
                         <td><?php echo $registro->id; ?></td>
-                        <td><?php echo $registro->producto_id; ?></td>
+                        <td><?php echo $registro->producto_nombre; ?></td>
                         <td><?php echo $registro->mov_cantidad; ?></td>
                         <td><?php echo $registro->mov_fecha; ?></td>
                         <td>
@@ -172,9 +163,18 @@ if (estaLogueado()) {
     </div>
 
     <script>
+        $(document).ready(function() {
+            $("#anno").hide();
+            $("#mes").hide();
+            $("#semana").hide();
+            $("#gen").hide();
+        })
+
         $(document).on('click', '.eliminarFila', function() {
             document.getElementById("formEliminar").action = "<?= URLROOT; ?>/movimientos/eliminar/" + $(this).data('fila');
         });
+
+
 
         $('#opciones').on('change', function() {
             var valor = $('#opciones option:selected').val();
@@ -183,27 +183,104 @@ if (estaLogueado()) {
                     $("#anno").hide();
                     $("#mes").hide();
                     $("#semana").hide();
+                    $("#gen").hide();
+
                     break;
                 case "1":
                     $("#anno").show();
                     $("#mes").hide();
                     $("#semana").hide();
+                    $("#gen").show();
+
                     break;
                 case "2":
                     $("#anno").hide();
                     $("#mes").show();
                     $("#semana").hide();
+                    $("#gen").show();
+
                     break;
                 case "3":
                     $("#anno").hide();
                     $("#mes").hide();
                     $("#semana").show();
+                    $("#gen").show();
                     break;
             }
         });
 
         $('#gen').on('click', function() {
+            var valor = $('#opciones option:selected').val();
+            switch (valor) {
+                case "0":
+                    $("#datos form").attr('action', "");
+                    break;
+                case "1":
+                    $("#datos form").attr('action', "<?= URLROOT; ?>/movimientos/anno/" + $("#anAnno").val());
 
+                    break;
+                case "2":
+                    $("#datos form").attr('action', "<?= URLROOT; ?>/movimientos/mes/" + $("#mesAnno").val() + "/" + $("#mesMes").val());
+
+                    break;
+                case "3":
+                    let date = new Date($("#semSemana").val());
+                    $("#datos form").attr('action', "<?= URLROOT; ?>/movimientos/semana/" + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate());
+
+                    break;
+            }
+        });
+
+        $(document).ready(function() {
+            $("#datos form").validate({
+                rules: {
+                    'yeary': {
+                        digits: true
+                    },
+                    'yearm': {
+                        digits: true
+                    },
+                    'monthm': {
+                        digits: true
+                    },
+                    'week': {
+                        required: true
+                    },
+
+                    agree: 'required'
+                },
+                messages: {
+                    'yeary': {
+                        digits: "Solo números"
+                    },
+                    'yearm': {
+                        digits: "Solo números"
+                    },
+                    'monthm': {
+                        digits: "Solo números"
+                    },
+                    'week': {
+                        required: "Ingrese una fecha"
+                    },
+                },
+                errorElement: "em",
+                errorPlacement: function(error, element) {
+                    // Add the `invalid-feedback` class to the error element
+                    error.addClass("invalid-feedback");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.next("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
         });
     </script>
 <?php

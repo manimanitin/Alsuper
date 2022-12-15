@@ -26,7 +26,7 @@ class Movimiento
 
     public function reporteAnual($data)
     {
-        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE YEAR(mov_fecha=:anno');
+        $registro = $this->db->query('SELECT id, producto_id,mov_cantidad,mov_fecha FROM movimientos WHERE YEAR(mov_fecha)=:anno');
         $this->db->bind(':anno', $data['year']);
 
         $registro = $this->db->multiple();
@@ -91,7 +91,19 @@ class Movimiento
 
         ];
 
-        $registro = $this->db->query('SELECT id,producto_id,mov_cantidad,mov_fecha FROM movimientos limit :offset, :limite');
+        // $registro = $this->db->query('SELECT id,producto_id,mov_cantidad,mov_fecha FROM movimientos limit :offset, :limite');
+        $registro = $this->db->query('SELECT
+        mov.id,
+        mov.producto_id,
+        prod.producto_nombre,
+        mov.mov_cantidad,
+        mov.mov_fecha
+    FROM
+        movimientos AS mov,
+        productos AS prod
+    WHERE
+        mov.producto_id = prod.id; limit :offset, :limite');
+
         $this->db->bind(':limite', $limite);
         $this->db->bind(':offset', $offset);
 

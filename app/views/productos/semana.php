@@ -11,20 +11,23 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 
 <?php
 if (estaLogueado()) {
+    # code...
     $datos = explode(' ', end($data));
+
+
 ?>
 
 
 
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/1">Exportar a CSV</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/2">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/mes/<?= $datos[0] ?>/<?= $datos[1] ?>/3">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/semana/<?= $datos[0] ?>/<?= $datos[1] ?>/<?= $datos[2] ?>/1">Exportar a CSV</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/semana/<?= $datos[0] ?>/<?= $datos[1] ?>/<?= $datos[2] ?>/2">Exportar a JSON</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/semana/<?= $datos[0] ?>/<?= $datos[1] ?>/<?= $datos[2] ?>/3">Exportar a PDF</a>
 
         </div>
         <div class="col-sm-1">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/movimientos/agregar"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/agregar"><i class="fa fa-plus"></i></a>
         </div>
 
     </div>
@@ -34,11 +37,12 @@ if (estaLogueado()) {
         <table class="table table-bordered table hover">
             <tbody>
                 <th>ID</th>
-                <th>Producto_id</th>
-                <!-- <th>Contraseña</th> -->
-                <th>Cantidad</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <th>ID Proveedor</th>
+                <th>Precio</th>
                 <th>Fecha</th>
-                <th></th>
+                <th>Foto</th>
                 <?php
                 foreach ($data as $registro) {
                     if (!isset($registro->id)) {
@@ -48,11 +52,17 @@ if (estaLogueado()) {
 
                     <tr>
                         <td><?php echo $registro->id; ?></td>
-                        <td><?php echo $registro->producto_id; ?></td>
-                        <td><?php echo $registro->mov_cantidad; ?></td>
-                        <td><?php echo $registro->mov_fecha; ?></td>
+                        <td><?php echo $registro->producto_nombre; ?></td>
+                        <td><?php echo $registro->producto_stock; ?></td>
+                        <td><?php echo $registro->proveedor_id; ?></td>
+                        <td><?php echo $registro->producto_precio; ?></td>
+                        <td><?php echo $registro->producto_fecha; ?></td>
+
+                        <td><img src="data:image/png;base64,<?php echo base64_encode($registro->producto_foto); ?>" height="30" width="30" alt="Foto"></td>
+
+
                         <td>
-                            <a href="<?= URLROOT; ?>/movimientos/editar/<?= $registro->id; ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="<?= URLROOT; ?>/productos/editar/<?= $registro->id; ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
 
                             <a type='button' href="#" class="btn btn-danger btn-sm eliminarFila" data-bs-toggle="modal" data-bs-target="#modalEliminar" data-fila=<?php echo $registro->id; ?>>
                                 <i class="fa fa-trash"></i>
@@ -68,7 +78,7 @@ if (estaLogueado()) {
             </tfoot>
         </table>
     </div>
-
+    
 
     <!-- MODAL ELIMINAR-->
     <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -79,13 +89,13 @@ if (estaLogueado()) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Estas seguro que quieres eliminar este registro de movimiento?
+                    Estas seguro que quieres eliminar este registro de producto?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form id='formEliminar' action="<?= URLROOT; ?>/movimientos/eliminar/<?= $registro->id ?>" method="POST" enctype="multipart/form-data">
+                    <form id='formEliminar' action="<?= URLROOT; ?>/productos/eliminar/<?= $registro->id ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="porBorrar" value="">
-                        <button type="submit" class="btn btn-primary">Eliminar Movimiento</button></a>
+                        <button type="submit" class="btn btn-primary">Eliminar Producto</button></a>
                     </form>
                 </div>
             </div>
@@ -94,7 +104,7 @@ if (estaLogueado()) {
 
     <script>
         $(document).on('click', '.eliminarFila', function() {
-            document.getElementById("formEliminar").action = "<?= URLROOT; ?>/movimientos/eliminar/" + $(this).data('fila');
+            document.getElementById("formEliminar").action = "<?= URLROOT; ?>/productos/eliminar/" + $(this).data('fila');
         });
     </script>
 <?php

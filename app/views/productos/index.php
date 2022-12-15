@@ -14,11 +14,63 @@ if (estaLogueado()) {
     # code...
 
 ?>
+    <div id="datos">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                Filtrar por
+                <select id="opciones">
+                    <option value="0">
+                        -------
+                    </option>
+                    <option value="1">
+                        Año
+                    </option>
+                    <option value="2">
+                        Mes
+                    </option>
+                    <option value="3">
+                        Semana
+                    </option>
+                </select>
+            </div>
+            <div id="anno">
+                <div class="mb-3">
+                    <label for="" class="form-label">AÑO</label>
+                    <input type="text" class="form-control" name="yeary" id="anAnno" placeholder="">
+                </div>
+
+            </div>
+
+            <div id="mes" class="mb-3">
+                <div class="mb-3">
+                    <label for="" class="form-label">AÑO</label>
+                    <input type="text" class="form-control" name="yearm" id="mesAnno" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">MES</label>
+                    <input type="text" class="form-control" name="monthm" id="mesMes" placeholder="">
+                </div>
+            </div>
+
+            <div id="semana">
+                <div class="mb-3">
+                    <label for="" class="form-label">Día</label>
+                    <input type="date" class="form-control" name="week" id="semSemana" placeholder="">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" id="gen">Filtrar</button>
+        </form>
+    </div>
+    </form>
+
+
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/csv">Exportar a CSV</a>
+            <!-- <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/csv">Exportar a CSV</a>
             <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/json">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/pdf">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/pdf">Exportar a PDF</a> -->
 
         </div>
         <div class="col-sm-1">
@@ -33,10 +85,10 @@ if (estaLogueado()) {
             <tbody>
                 <th>ID</th>
                 <th>Nombre</th>
-                <!-- <th>Contraseña</th> -->
                 <th>Stock</th>
-                <th>ID Proveedor</th>
+                <th>Proveedor</th>
                 <th>Precio</th>
+                <th>Fecha</th>
                 <th>Foto</th>
                 <?php
                 foreach ($data['productos'] as $registro) {
@@ -46,8 +98,10 @@ if (estaLogueado()) {
                         <td><?php echo $registro->id; ?></td>
                         <td><?php echo $registro->producto_nombre; ?></td>
                         <td><?php echo $registro->producto_stock; ?></td>
-                        <td><?php echo $registro->proveedor_id; ?></td>
+                        <td><?php echo $registro->prov_nombre; ?></td>
                         <td><?php echo $registro->producto_precio; ?></td>
+                        <td><?php echo $registro->producto_fecha; ?></td>
+
                         <td><img src="data:image/png;base64,<?php echo base64_encode($registro->producto_foto); ?>" height="30" width="30" alt="Foto"></td>
 
 
@@ -116,8 +170,121 @@ if (estaLogueado()) {
     </div>
 
     <script>
+        $(document).ready(function() {
+            $("#anno").hide();
+            $("#mes").hide();
+            $("#semana").hide();
+            $("#gen").hide();
+        })
+
         $(document).on('click', '.eliminarFila', function() {
             document.getElementById("formEliminar").action = "<?= URLROOT; ?>/productos/eliminar/" + $(this).data('fila');
+        });
+        $('#opciones').on('change', function() {
+            var valor = $('#opciones option:selected').val();
+            switch (valor) {
+                case "0":
+                    $("#anno").hide();
+                    $("#mes").hide();
+                    $("#semana").hide();
+                    $("#gen").hide();
+
+                    break;
+                case "1":
+                    $("#anno").show();
+                    $("#mes").hide();
+                    $("#semana").hide();
+                    $("#gen").show();
+
+                    break;
+                case "2":
+                    $("#anno").hide();
+                    $("#mes").show();
+                    $("#semana").hide();
+                    $("#gen").show();
+
+                    break;
+                case "3":
+                    $("#anno").hide();
+                    $("#mes").hide();
+                    $("#semana").show();
+                    $("#gen").show();
+                    break;
+            }
+        });
+
+        $('#gen').on('click', function() {
+            var valor = $('#opciones option:selected').val();
+            switch (valor) {
+                case "0":
+                    $("#datos form").attr('action', "");
+                    break;
+                case "1":
+                    $("#datos form").attr('action', "<?= URLROOT; ?>/productos/anno/" + $("#anAnno").val());
+
+                    break;
+                case "2":
+                    $("#datos form").attr('action', "<?= URLROOT; ?>/productos/mes/" + $("#mesAnno").val() + "/" + $("#mesMes").val());
+
+                    break;
+                case "3":
+                    let date = new Date($("#semSemana").val());
+                    $("#datos form").attr('action', "<?= URLROOT; ?>/productos/semana/" + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate());
+
+                    break;
+            }
+        });
+
+        $(document).ready(function() {
+            $("#datos form").validate({
+                rules: {
+                    'yeary': {
+                        digits: true
+                    },
+                    'yearm': {
+                        digits: true
+                    },
+                    'monthm': {
+                        digits: true
+                    },
+                    'week': {
+                        required: true
+                    },
+
+                    agree: 'required'
+                },
+                messages: {
+                    'yeary': {
+                        digits: "Solo números"
+                    },
+                    'yearm': {
+                        digits: "Solo números"
+                    },
+                    'monthm': {
+                        digits: "Solo números"
+                    },
+                    'week': {
+                        required: "Ingrese una fecha"
+                    },
+                },
+                errorElement: "em",
+                errorPlacement: function(error, element) {
+                    // Add the `invalid-feedback` class to the error element
+                    error.addClass("invalid-feedback");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.next("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
         });
     </script>
 <?php
