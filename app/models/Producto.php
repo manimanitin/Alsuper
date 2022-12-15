@@ -14,7 +14,16 @@ class Producto
 
     public function reporteMensual($data)
     {
-        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos WHERE YEAR(producto_fecha)=:anno AND MONTH(producto_fecha)=:mes');
+        $registro = $this->db->query('SELECT prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre,
+        prod.producto_foto FROM 
+        productos AS prod,
+        proveedores AS prov WHERE prod.proveedor_id=prov.id and YEAR(producto_fecha)=:anno AND MONTH(producto_fecha)=:mes');
         $this->db->bind(':anno', $data['year']);
         $this->db->bind(':mes', $data['month']);
         $registro = $this->db->multiple();
@@ -23,7 +32,18 @@ class Producto
 
     public function reporteAnual($data)
     {
-        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos WHERE YEAR(producto_fecha)=:anno');
+        $registro = $this->db->query('SELECT
+        prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre,
+        prod.producto_foto
+    FROM
+        productos AS prod,
+        proveedores AS prov WHERE prod.proveedor_id=prov.id and YEAR(prod.producto_fecha)=:anno');
         $this->db->bind(':anno', $data['year']);
 
         $registro = $this->db->multiple();
@@ -32,13 +52,79 @@ class Producto
 
     public function reporteSemanal($data)
     {
-        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos WHERE DATE(producto_fecha) BETWEEN :primer AND :segun');
+        $registro = $this->db->query('SELECT prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre,
+        prod.producto_foto FROM 
+        productos AS prod,
+        proveedores AS prov 
+        WHERE prod.proveedor_id=prov.id and (DATE(prod.producto_fecha) BETWEEN :primer AND :segun)');
         $this->db->bind('primer', $data['primera']);
         $this->db->bind('segun', $data['segunda']);
         $registro = $this->db->multiple();
         return ($registro);
     }
 
+
+    public function reporteMensualJ($data)
+    {
+        $registro = $this->db->query('SELECT prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre
+        FROM 
+        productos AS prod,
+        proveedores AS prov WHERE prod.proveedor_id=prov.id and YEAR(producto_fecha)=:anno AND MONTH(producto_fecha)=:mes');
+        $this->db->bind(':anno', $data['year']);
+        $this->db->bind(':mes', $data['month']);
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+    public function reporteAnualJ($data)
+    {
+        $registro = $this->db->query('SELECT
+        prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre
+        FROM
+        productos AS prod,
+        proveedores AS prov WHERE prod.proveedor_id=prov.id and YEAR(prod.producto_fecha)=:anno');
+        $this->db->bind(':anno', $data['year']);
+
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
+
+    public function reporteSemanalJ($data)
+    {
+        $registro = $this->db->query('SELECT prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre
+        FROM 
+        productos AS prod,
+        proveedores AS prov 
+        WHERE prod.proveedor_id=prov.id and (DATE(prod.producto_fecha) BETWEEN :primer AND :segun)');
+        $this->db->bind('primer', $data['primera']);
+        $this->db->bind('segun', $data['segunda']);
+        $registro = $this->db->multiple();
+        return ($registro);
+    }
 
     public function buscarProductoPorCorreoProductoID($producto_id, $producto_username)
     {

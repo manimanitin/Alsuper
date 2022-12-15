@@ -31,7 +31,7 @@ class Productos extends Controller
                 $this->view('/productos/csv', $productos);
                 break;
             case "2":
-                $productos = $this->productoModel->reporteMensual($data);
+                $productos = $this->productoModel->reporteMensualJ($data);
 
                 $this->view('/productos/json', $productos);
                 break;
@@ -64,7 +64,7 @@ class Productos extends Controller
                 $this->view('/productos/csv', $productos);
                 break;
             case "2":
-                $productos = $this->productoModel->reporteAnual($data);
+                $productos = $this->productoModel->reporteAnualJ($data);
                 $this->view('/productos/json', $productos);
                 break;
             case "3":
@@ -103,7 +103,7 @@ class Productos extends Controller
                 $this->view('/productos/csv', $productos);
                 break;
             case "2":
-                $productos = $this->productoModel->reporteSemanal($data);
+                $productos = $this->productoModel->reporteSemanalJ($data);
                 $this->view('/productos/json', $productos);
                 break;
             case "3":

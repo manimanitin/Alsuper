@@ -68,9 +68,9 @@ if (estaLogueado()) {
 
     <div class="row mt-3 mb-3">
         <div class="col-sm-11">
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/csv">Exportar a CSV</a>
+            <!-- <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/csv">Exportar a CSV</a>
             <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/json">Exportar a JSON</a>
-            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/pdf">Exportar a PDF</a>
+            <a class="btn btn-success btn-xs" href="<?= URLROOT; ?>/productos/pdf">Exportar a PDF</a> -->
 
         </div>
         <div class="col-sm-1">
@@ -85,7 +85,6 @@ if (estaLogueado()) {
             <tbody>
                 <th>ID</th>
                 <th>Nombre</th>
-                <!-- <th>Contraseña</th> -->
                 <th>Stock</th>
                 <th>Proveedor</th>
                 <th>Precio</th>
