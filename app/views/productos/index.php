@@ -35,7 +35,7 @@ if (estaLogueado()) {
                 <th>Nombre</th>
                 <!-- <th>Contraseña</th> -->
                 <th>Stock</th>
-                <th>ID Proveedor</th>
+                <th>Proveedor</th>
                 <th>Precio</th>
                 <th>Fecha</th>
                 <th>Foto</th>
@@ -47,7 +47,7 @@ if (estaLogueado()) {
                         <td><?php echo $registro->id; ?></td>
                         <td><?php echo $registro->producto_nombre; ?></td>
                         <td><?php echo $registro->producto_stock; ?></td>
-                        <td><?php echo $registro->proveedor_id; ?></td>
+                        <td><?php echo $registro->prov_nombre; ?></td>
                         <td><?php echo $registro->producto_precio; ?></td>
                         <td><?php echo $registro->producto_fecha; ?></td>
 

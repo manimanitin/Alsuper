@@ -85,7 +85,7 @@ if (estaLogueado()) {
         <table class="table table-bordered table hover">
             <tbody>
                 <th>ID</th>
-                <th>Producto_id</th>
+                <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Fecha</th>
                 <th></th>
@@ -95,7 +95,7 @@ if (estaLogueado()) {
 
                     <tr>
                         <td><?php echo $registro->id; ?></td>
-                        <td><?php echo $registro->producto_id; ?></td>
+                        <td><?php echo $registro->producto_nombre; ?></td>
                         <td><?php echo $registro->mov_cantidad; ?></td>
                         <td><?php echo $registro->mov_fecha; ?></td>
                         <td>

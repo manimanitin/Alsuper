@@ -48,7 +48,20 @@ class Producto
 
     public function listarProductos()
     {
-        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos');
+        // $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos');
+        $registro = $this->db->query('SELECT
+        prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre,
+        prod.producto_foto
+    FROM
+        productos AS prod,
+        proveedores AS prov
+        WHERE prod.proveedor_id=prov.id');
         $registro = $this->db->multiple();
         return ($registro);
     }
@@ -72,7 +85,20 @@ class Producto
 
         ];
 
-        $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos limit :offset, :limite');
+        // $registro = $this->db->query('SELECT id, producto_nombre, producto_stock, producto_precio, producto_fecha, proveedor_id, producto_foto FROM productos limit :offset, :limite');
+        $registro = $this->db->query('SELECT
+        prod.id,
+        prod.producto_nombre,
+        prod.producto_stock,
+        prod.producto_precio,
+        prod.producto_fecha,
+        prod.proveedor_id,
+        prov.prov_nombre,
+        prod.producto_foto
+    FROM
+        productos AS prod,
+        proveedores AS prov
+        WHERE prod.proveedor_id=prov.id order by prod.id limit :offset, :limite ');
         $this->db->bind(':limite', $limite);
         $this->db->bind(':offset', $offset);
 
