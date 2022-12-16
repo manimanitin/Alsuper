@@ -68,7 +68,7 @@ if (estaLogueado()) {
                 rules: {
                     'producto-nombre': {
                         required: true,
-                        pattern: /^[a-z0-9 ,.'-]+$/
+                        pattern: /^[a-zA-Z0-9 ,.'-]+$/
                     },
                     'producto-stock': {
                         required: true,
