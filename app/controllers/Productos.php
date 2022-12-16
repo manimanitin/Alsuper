@@ -212,7 +212,7 @@ class Productos extends Controller
                 'producto_precio' =>  $_POST['producto-precio'],
                 'producto_fecha' =>  $_POST['producto-fecha'],
                 'proveedor_id' =>  $_POST['proveedor-id'],
-                'producto_foto' =>  $_POST['producto-foto']
+                'producto_foto' =>  $producto_foto
             ];
 
             if (!($data['msg_error'] = '')) {
