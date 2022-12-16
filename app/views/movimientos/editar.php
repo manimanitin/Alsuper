@@ -49,7 +49,7 @@ if (estaLogueado()) {
                 <input type="date" class="form-control" name="mov-fecha" id="pass" value='<?= $data->mov_fecha ?>' placeholder="">
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="submit" class="btn btn-primary">Editar</button>
 
         </form>
     </div>

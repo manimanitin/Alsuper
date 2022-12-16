@@ -12,7 +12,6 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 <?php
 if (estaLogueado()) {
     # code...
-    print_r($data);
 ?>
     <div id="datos">
         <form action="<?=
@@ -85,7 +84,7 @@ if (estaLogueado()) {
                     },
                     'usuario-nombreCompleto': {
                         required: true,
-                        pattern: /^[a-z ,.'-]+$/
+                        pattern: /^[a-zA-Z\s,.'-]+$/
                     },
                     'usuario-nivel': {
                         required: true,
