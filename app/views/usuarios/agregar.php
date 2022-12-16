@@ -12,7 +12,7 @@ if (isset($data['msg_error']) && $data['msg_error'] != '') {
 <?php
 if (estaLogueado()) {
     # code...
-
+    print_r($data);
 ?>
     <div id="datos">
         <form action="<?=
@@ -41,13 +41,22 @@ if (estaLogueado()) {
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nivel</label>
-                <input type="text" class="form-control" name="usuario-nivel" id="nivel" placeholder="">
+                <br>
+                <select name="usuario-nivel">
+                    <option value="1" selected>
+                        Administrador
+                    </option>
+                    <option value="0">
+                        Usuario
+                    </option>
+                </select>
             </div>
-
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
+    </form>
+
     <br>
 
     <script>

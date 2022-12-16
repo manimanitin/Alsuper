@@ -36,7 +36,7 @@ class Usuarios extends Controller
 
             ];
             //se puede hacer doble validacion
-            if (empty($data['usuario_id']) || empty($data['usuario_username']) || empty($data['usuario_password']) || empty($data['usuario_nombreCompleto']) || empty($data['usuario_nivel']) || empty($data['usuario_confirmacion'])) {
+            if (empty($data['usuario_id']) || empty($data['usuario_username']) || empty($data['usuario_password']) || empty($data['usuario_nombreCompleto'])  || empty($data['usuario_confirmacion'])) {
                 $data['msg_error'] = 'llene todos los campos';
             }
 

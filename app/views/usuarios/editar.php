@@ -25,7 +25,7 @@ if (estaLogueado()) {
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" name="usuario-password" id="usuario-password"  placeholder="">
+                <input type="password" class="form-control" name="usuario-password" id="usuario-password" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Confirmar contraseña</label>
@@ -37,7 +37,19 @@ if (estaLogueado()) {
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Nivel</label>
-                <input type="text" class="form-control" name="usuario-nivel" id="nivel" value='<?= $data->usuario_nivel ?>' placeholder="">
+                <br>
+                <select name="usuario-nivel">
+                    <option value="1" <?php if ($data->usuario_nivel == 1) {
+                                            echo 'selected';
+                                        } ?>>
+                        Administrador
+                    </option>
+                    <option value="0" <?php if ($data->usuario_nivel == 0) {
+                                            echo 'selected';
+                                        } ?>>
+                        Usuario
+                    </option>
+                </select>
             </div>
 
 
